@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - TriggerA
+  - TriggerB
+  - TriggerC
+  - ObjectB
+  - ObjectC
+  - ObjectA
+  - UI
+  - Clock
+  - DeathZone
+  - Index
+  - Thumb
+  - Slider
+  - PinchRange
+  - FingerButton
+  - PlatformBorder
+  - Ground
+  - Wall
+  - Fingers
+  - Palm
+  - Dockable
+  - Escalator
+  - EscalatorEnd
+  - X
+  - Y
+  - Z
+  - NormcorePlayer
+  - NormcoreCentroid
+  - Centroid
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - HandPhysics
+  - Skybox
+  - Slider
+  - NotWalkable
+  - Walkable
+  - Studio
+  - Frozen
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Spatial Awareness
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

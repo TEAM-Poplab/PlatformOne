@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1893448595, guid: a040fb66244a7f54289914d98ea4ef7d, type: 3}
+  m_Name: ObjectParent
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":0.0,"y":0.0},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-204.0,"y":-144.0},"guid":"490d1388-c095-48e4-a31b-cbb7d9022dcb","$version":"A","$type":"Bolt.Start","$id":"9"},{"kind":"Scene","defaultValues":{"name":{"$content":"ObjectParent","$type":"System.String"}},"position":{"x":-28.0,"y":-138.0},"guid":"ab61d08b-d872-460d-8884-65a2613ec502","$version":"A","$type":"Bolt.SetVariable","$id":"11"},{"defaultValues":{},"position":{"x":-198.0,"y":-52.0},"guid":"c51744fc-bd9f-4d91-b62f-6be2168b794e","$version":"A","$type":"Bolt.Self","$id":"13"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"11"},"destinationKey":"assign","guid":"7a0ff9b5-fde7-4500-a987-35c61e39459d","$type":"Bolt.ControlConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"self","destinationUnit":{"$ref":"11"},"destinationKey":"input","guid":"686e3749-e6cc-49b7-b78d-4515ce666112","$type":"Bolt.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

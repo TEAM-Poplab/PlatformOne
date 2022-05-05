@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2067819806, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
+  m_Name: ApplicationVariables
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"collection":{"$content":[{"name":"Camera","value":null,"$version":"A"},{"name":"Pinching","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"InRange","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"ActiveDock","value":null,"$version":"A"},{"name":"ActiveObject","value":null,"$version":"A"},{"name":"PinchingFinger","value":null,"$version":"A"},{"name":"FingerInRange","value":null,"$version":"A"},{"name":"ActiveSlider","value":null,"$version":"A"},{"name":"CenterPoint","value":null,"$version":"A"},{"name":"ButtonInteraction","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"ButtonPressed","value":null,"$version":"A"},{"name":"IsHolding","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"StartingPinch","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"EndingPinch","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"JitterTime","value":{"$content":0.1,"$type":"System.Single"},"$version":"A"},{"name":"Grabbing","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"InGrabRange","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"GrabbingHand","value":null,"$version":"A"},{"name":"HandInRange","value":null,"$version":"A"},{"name":"ActiveGrabbedObject","value":null,"$version":"A"},{"name":"PressingFinger","value":null,"$version":"A"},{"name":"HandTrackingLoss","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"LastScene","value":{"$content":"LoadingScene","$type":"System.String"},"$version":"A"},{"name":"CurrentActivePointer","value":null,"$version":"A"},{"name":"Gesturing","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"ActiveGesture","value":null,"$version":"A"},{"name":"GesturingHand","value":null,"$version":"A"},{"name":"StoppingPinch","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"Language","value":{"$content":"IT","$type":"System.String"},"$version":"A"},{"name":"GameManager","value":null,"$version":"A"},{"name":"SceneMode","value":{"$content":0,"$type":"System.Int32"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []

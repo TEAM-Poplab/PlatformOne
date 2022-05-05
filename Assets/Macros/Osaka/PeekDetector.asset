@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1893448595, guid: a040fb66244a7f54289914d98ea4ef7d, type: 3}
+  m_Name: PeekDetector
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":-114.5555,"y":14.05557},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{"target":null},"position":{"x":-228.0,"y":-121.0},"guid":"7c64b5db-8d1d-4b62-9b61-5f0fd50497b7","$version":"A","$type":"Bolt.OnTriggerEnter","$id":"9"},{"argumentCount":1,"defaultValues":{"name":{"$content":"HeadCollisionOff","$type":"System.String"},"target":null},"position":{"x":7.0,"y":28.0},"guid":"2006f179-72a0-4d9d-ab37-bc4e1069e68e","$version":"A","$type":"Bolt.TriggerCustomEvent","$id":"11"},{"specifyFallback":false,"kind":"Scene","defaultValues":{"name":{"$content":"GameManager","$type":"System.String"}},"position":{"x":-416.0,"y":-36.0},"guid":"a794c7c0-0763-4395-b287-0bfaf9c4ce61","$version":"A","$type":"Bolt.GetVariable","$id":"13"},{"argumentCount":1,"defaultValues":{"name":{"$content":"HeadCollisionOn","$type":"System.String"},"target":null},"position":{"x":6.0,"y":-140.0},"guid":"5a1c9961-5ef3-46eb-9cde-198a41d3dfc0","$version":"A","$type":"Bolt.TriggerCustomEvent","$id":"15"},{"coroutine":false,"defaultValues":{"target":null},"position":{"x":-229.0,"y":47.0},"guid":"1583bb31-d642-4b0d-9a28-4fc2ffdd76b4","$version":"A","$type":"Bolt.OnTriggerExit","$id":"17"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"15"},"destinationKey":"enter","guid":"c8870a78-9a91-445c-9a75-e64936a2d83f","$type":"Bolt.ControlConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"trigger","destinationUnit":{"$ref":"11"},"destinationKey":"enter","guid":"a98a8d54-1fe1-4a51-862a-52b005aaaec7","$type":"Bolt.ControlConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"value","destinationUnit":{"$ref":"15"},"destinationKey":"target","guid":"d8b6c7c0-bd88-4f2e-873d-a0027b464f9a","$type":"Bolt.ValueConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"value","destinationUnit":{"$ref":"11"},"destinationKey":"target","guid":"aa08e743-9960-44ca-b70b-4d5eb0bba117","$type":"Bolt.ValueConnection"},{"sourceUnit":{"$ref":"9"},"sourceKey":"collider","destinationUnit":{"$ref":"15"},"destinationKey":"argument_0","guid":"271b5fb8-878d-4c75-8bce-2d911861f9e5","$type":"Bolt.ValueConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"collider","destinationUnit":{"$ref":"11"},"destinationKey":"argument_0","guid":"4c3dcad1-b172-43bd-8717-35cecb5e71ed","$type":"Bolt.ValueConnection"},{"position":{"xMin":-483.4444,"yMin":-180.6667,"xMax":254.3334,"yMax":208.7778},"label":"Detects
+      head collisions to enable/disable peek system","comment":null,"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"guid":"5c59a6d2-1cce-4624-8a47-0310b111880d","$version":"A","$type":"Ludiq.GraphGroup"}],"$version":"A"}}'
+    _objectReferences: []
