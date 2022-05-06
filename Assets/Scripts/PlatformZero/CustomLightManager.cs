@@ -326,6 +326,9 @@ public class CustomLightManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Rotate the custom light according to the angle correspoding to time unit. Same versione as <see cref="RotateSun(float)"/>, but more direct angle value driven
+    /// </summary>
     private void RotateSunByAngle2()
     {
         _customDirectionalLight.transform.Rotate(new Vector3(-(angleForRealTimeUnit * worldSecondsRatio) * Time.deltaTime, 0, 0));
@@ -383,6 +386,9 @@ public class CustomLightManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Properly set the sunlight on start
+    /// </summary>
     public void CustomLightOnStart()
     {
         if (useCustomLight)
@@ -417,6 +423,9 @@ public class CustomLightManager : MonoBehaviour
         GameManager.Instance.OnDayLightSet.AddListener(ResumeCustomLight);
     }
 
+    /// <summary>
+    /// Allows the activation/deactivation of the sunlight rotation
+    /// </summary>
     public void ResumeCustomLight()
     {
         if (useCustomLight)

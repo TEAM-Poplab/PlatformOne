@@ -11,7 +11,7 @@ using Bolt;
 using Ludiq;
 
 /// <summary>
-/// The class <c>Platformable</c> behaves similar to <see cref="Microsoft.MixedReality.Toolkit.Experimental.UI.Dockable"/>, but it handles also any aspect related to object manipulation while docked.
+/// The class <c>Platformable</c> behaves similar to <see cref="Microsoft.MixedReality.Toolkit.Experimental.UI.Dockable"/>, but it also handles any aspect related to object manipulation while it's docked.
 /// It is attached to the object which needs to implement any manipulation event while docked in the special projection dock.
 /// <para>It also implements the function to project the docked object</para>
 /// </summary>
@@ -131,6 +131,7 @@ public class Platformable : MonoBehaviour
 
     protected virtual void Awake()
     {
+        //Setting up necessary properties
         miniScene = GameObject.Find("GuardianCenter/Dock/PlatformDockPosition/MiniScene");
         platformDockPosition = GameObject.Find("GuardianCenter/Dock/PlatformDockPosition").GetComponent<PlatformDockPosition>();
         platformPlaceholder = GameObject.Find("GuardianCenter/ObjectPlaceholder").GetComponent<PlatformPlaceholder>();
@@ -171,7 +172,6 @@ public class Platformable : MonoBehaviour
 
                 platformPlaceholder.EnableLiveChanges = false; //it is set here because all animations have eneded and changes can be synced without interferences
 
-                //platformDockPosition.ChangeScale(BoundsExtensions.GetScaleToFitInside(GetComponent<BoxCollider>().bounds, platformDockPosition.FittingBounds), 0.5f);
                 float maxGeometryLossyScale = GeometrySetModule.SizeGreaterThan(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
                 float maxBoundsSize = GeometrySetModule.SizeGreaterThan(GetComponent<BoxCollider>().size.x, GetComponent<BoxCollider>().size.y, GetComponent<BoxCollider>().size.z);
                 while (maxGeometryLossyScale * maxBoundsSize < 0.135f || maxGeometryLossyScale * maxBoundsSize > 0.145f)
@@ -188,7 +188,6 @@ public class Platformable : MonoBehaviour
                     }
                 }
 
-                //StartCoroutine(ChangeScale());
                 FreezeGeometries.Instance.frozenGeometryEvent.AddListener(OnFreezeEvent);
 
                 //Creating rotation handles
@@ -229,6 +228,9 @@ public class Platformable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method docks the object which is called upon in the <see cref="PlatformDockPosition"/>, setting up all the necessary reference system and saving values
+    /// </summary>
     public virtual void Dock()
     {
         if (!CanPlatform)
@@ -266,6 +268,9 @@ public class Platformable : MonoBehaviour
         platformState = PlatformState.Platforming;
     }
 
+    /// <summary>
+    /// This method undocks the object which is called upon from the <see cref="PlatformDockPosition"/>, resetting the reference system and retrieving saved values
+    /// </summary>
     public virtual void Undock()
     {
         if (!CanUnplatform)
@@ -291,6 +296,10 @@ public class Platformable : MonoBehaviour
         miniSceneCenter = null;
     }
 
+    /// <summary>
+    /// This method docks the object which is called upon in the <see cref="PlatformDockPosition"/>, setting up all the necessary reference system and saving values.
+    /// Conversely from <see cref="Platformable.Undock"/>, it is done instantly (not when an user interacts with the Dock) whenever a new geometry is placed on the projection Dock and replaces the current one
+    /// </summary>
     public virtual void InstantUndock()
     {
         platformDockPosition.PlatformedObject = null;
@@ -352,6 +361,9 @@ public class Platformable : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// This method is called on the current Platformed Object when the Freeze button is pressed. It deletes all unnecessary elements and hides the original docked geometry
+    /// </summary>
     protected virtual void OnFreezeEvent()
     {
         platformDockPosition.PlatformedObject = null;
@@ -366,23 +378,13 @@ public class Platformable : MonoBehaviour
         StartCoroutine(ChangeAlphaUponFreezing());
     }
 
+    /// <summary>
+    /// This method is called on the current Unfreezed Object when the Unfreeze gesture is performed. It recreates all necessary elements and shows the original docked geometry.
+    /// It handles also the case in which an object is currently platformed, sending it back to the dock before renabling the unfreezed object
+    /// </summary>
     protected virtual void OnUnfreezeEvent()
     {
         objectMeshGameObject.GetComponent<MeshRenderer>().material = originalMaterial;
-        //foreach (DockPosition dp in dockObject.DockPositions)
-        //{
-        //    if (!dp.IsOccupied)
-        //    {
-        //        if (boundsControl.HandlesContainer != null)
-        //        {
-        //            boundsControl.DestroyBounds();
-        //            GetComponent<CustomBoxDisplay>().DestroyBoxDisplay();
-        //            GetComponent<ValueLabelsVisualizer>().DestroyLabels();
-        //        }
-        //        GetComponent<Dockable>().FastDock(dp);
-        //        break;
-        //    }
-        //}
         if (platformDockPosition.IsOccupied)
         {
             if (platformDockPosition.PlatformedObject.GetComponent<PlatformableMeshSequence>())
@@ -402,6 +404,9 @@ public class Platformable : MonoBehaviour
         IsFrozen = false;
     }
 
+    /// <summary>
+    /// This method recreates the reference system of the unfreezed object retrieving any saved tranform value at the point it was before freezing, so it recreates the manipulation structure
+    /// </summary>
     public virtual void DockAfterUnfreeze()
     {
         if (!CanPlatform)
@@ -436,6 +441,7 @@ public class Platformable : MonoBehaviour
         StartCoroutine(InitBoundsAfterFreezeDelay(1f));
     }
 
+    #region Manipulation events
     public virtual void OnManipulationStarted(ManipulationEventData e)
     {
         isDragging = true;
@@ -540,7 +546,9 @@ public class Platformable : MonoBehaviour
         CustomEvent.Trigger(GameManager.Instance.gameObject, "ForcedGrabOutRange");
         StartCoroutine(DestroyAnimation());
     }
+    #endregion
 
+    #region Utils methods
     protected virtual void OnDayLightSetMaterial()
     {
         if (platformState != PlatformState.Platformed)
@@ -683,4 +691,5 @@ public class Platformable : MonoBehaviour
         Debug.Log("Changes are " + (status ? "enabled" : "disabled"));
         platformPlaceholder.EnableLiveChanges = status;
     }
+    #endregion
 }

@@ -38,10 +38,6 @@ public class FogManager : MonoBehaviour
     // Start is called beforethe first frame update
     void Start()
     {
-        /*dayToNightFogDensityAnimation.preWrapMode = WrapMode.Once;
-        dayToNightFogDensityAnimation.postWrapMode = WrapMode.Once;
-        nightToDayFogDensityAnimation.preWrapMode = WrapMode.Once;
-        nightToDayFogDensityAnimation.postWrapMode = WrapMode.Once;*/
         fogColorBlendingAnimation.preWrapMode = WrapMode.Once;
         fogColorBlendingAnimation.postWrapMode = WrapMode.Once;
         _originalFogColor = RenderSettings.fogColor;
@@ -54,37 +50,6 @@ public class FogManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!lmScript.useCustomLight)
-        //{
-        //    if (_onDayToNight)
-        //    {
-        //        _timer += Time.deltaTime;
-        //        RenderSettings.fogColor = Color.Lerp(fogChangeColor, Color.black, _timer);
-        //        //RenderSettings.fogDensity = dayToNightFogDensityAnimation.Evaluate(_timer);
-        //        if (_timer > 1)
-        //        {
-        //            _onDayToNight = false;
-        //            _timer = 0;
-        //            GameObject.Find("Water").SetActive(false);
-        //        }
-        //    }
-        //    else if (_onNightToDay)
-        //    {
-        //        _timer += Time.deltaTime;
-        //        RenderSettings.fogColor = Color.Lerp(Color.black, fogChangeColor, _timer);
-        //        //RenderSettings.fogDensity = nightToDayFogDensityAnimation.Evaluate(_timer);
-        //        if (_timer > 1)
-        //        {
-        //            _onNightToDay = false;
-        //            _timer = 0;
-        //        }
-        //    }
-        //    //RenderSettings.fogColor = Color.black;
-        //} else
-        //{
-        //    RenderSettings.fogColor = Color.Lerp(Color.black, fogChangeColor, dayFogDensityAnimation.Evaluate(Mathf.InverseLerp(lmScript.dawnTime, lmScript.duskTime, lmScript.TimeOfDay)));
-        //}
-
         if (lmScript.useCustomLight)
         {
             RenderSettings.fogColor = Color.Lerp(fogColorOnNight, fogColorOnDay, fogColorBlendingAnimation.Evaluate(Mathf.InverseLerp(lmScript.dawnTime, lmScript.duskTime, lmScript.TimeOfDay)));
@@ -102,18 +67,17 @@ public class FogManager : MonoBehaviour
         _onNightToDay = true;
     }
 
+    /// <summary>
+    /// Properly set the fog color according to light position on start
+    /// </summary>
     public void FogManagerOnStart()
     {
         if (!lmScript.useCustomLight)
         {
-            //GameManager.Instance.OnDayLightSet.AddListener(IsNightToDay);
-            //GameManager.Instance.OnNightLightSet.AddListener(IsDayToNight);
             RenderSettings.fogColor = _originalFogColor;
         }
         else
         {
-            //GameManager.Instance.OnDayLightSet.RemoveListener(IsNightToDay);
-            //GameManager.Instance.OnNightLightSet.RemoveListener(IsDayToNight);
             RenderSettings.fogColor = Color.Lerp(fogColorOnNight, fogColorOnDay, fogColorBlendingAnimation.Evaluate(Mathf.InverseLerp(lmScript.dawnTime, lmScript.duskTime, lmScript.TimeOfDay)));
         }
     }

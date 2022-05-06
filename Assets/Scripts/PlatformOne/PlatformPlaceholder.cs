@@ -97,26 +97,15 @@ public class PlatformPlaceholder : MonoBehaviour
         {
             _instantiatedObjectOrigin.transform.localScale = Solver.SmoothTo(_instantiatedObjectOrigin.transform.localScale, Vector3.one, Time.deltaTime, lerpTime);
 
-            //if (_instantiatedObject.GetComponent<CustomBoundsControl>().HandlesContainer != null)
-            //{
-            //    _instantiatedObject.GetComponent<CustomBoundsControl>().DestroyBounds();
-            //}
-
             if (Mathf.Abs(_instantiatedObjectOrigin.transform.localScale.x / Vector3.one.x - 1.0f) < 0.01f)
             {
                 instantiatedObjectStatus = InstantStatus.INSTANTIATED;
                 _instantiatedObjectOrigin.transform.localScale = Vector3.one;
                 _instantiatedObjectOrigin.transform.localPosition = platformDock.PlatformedObject.transform.parent.localPosition;
-                //_instantiatedObjectOrigin.transform.localRotation = platformDock.PlatformedObject.transform.parent.localRotation;
-
                 startRotation = _instantiatedMainObject.transform.rotation;
             }
         } else if (instantiatedObjectStatus == InstantStatus.INSTANTIATED && _instantiatedObjectOrigin != null && enableLiveChanges)
         {
-            //_instantiatedMainObject.transform.localPosition = platformDock.PlatformedObject.transform.localPosition;
-            //_instantiatedMainObject.transform.rotation = platformDock.PlatformedObject.transform.rotation;
-            //_instantiatedMainObject.transform.localScale = platformDock.PlatformedObject.transform.localScale;
-            //_instantiatedObjectOrigin.transform.localPosition = platformDock.PlatformedObject.transform.parent.localPosition;
             _instantiatedObjectOrigin.transform.rotation = platformDock.PlatformedObject.transform.parent.rotation;
             _instantiatedObjectOrigin.transform.localScale = platformDock.PlatformedObject.transform.parent.localScale;
         } else if (instantiatedObjectStatus == InstantStatus.UNFROZEN)
@@ -130,8 +119,6 @@ public class PlatformPlaceholder : MonoBehaviour
                 startRotation = _instantiatedMainObject.transform.rotation;
             }
         }
-
-        //toggleRotation = ((bool)Variables.Object(toggleButton).Get("Status"));
     }
 
     /// <summary>

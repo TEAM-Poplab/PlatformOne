@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Utils class which allows the saving of the geometry status for whatever use
+/// </summary>
 public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
 {
+    /// <summary>
+    /// Struct to save a copy of the Transfrom values (Transform are handled by reference, but we need copies)
+    /// </summary>
     public struct SavedTransform
     {
         public Vector3 position;
@@ -26,18 +32,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
     Dictionary<GameObject, GameObject> savedProjectedGeometry = new Dictionary<GameObject, GameObject>();
     Dictionary<GameObject, GameObject> savedSliderObject = new Dictionary<GameObject, GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Saves the values of the slider
+    /// </summary>
+    /// <param name="obj">The object whose slider value is going to be saved</param>
+    /// <param name="val">The slider value to save</param>
     public void SaveSliderValue(GameObject obj, int val)
     {
         if(!sliderSavedValue.ContainsKey(obj))
@@ -50,6 +49,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
 
     }
 
+    /// <summary>
+    /// Retrieve the currently saved slider value
+    /// </summary>
+    /// <param name="obj">The object which we need to retrieve the slider value for</param>
+    /// <returns>The saved slider value</returns>
     public float GetSliderValue(GameObject obj)
     {
         float returnValue = 0;
@@ -57,6 +61,13 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         return returnValue == 0 ? 0 : returnValue;
     }
 
+    /// <summary>
+    /// Saves the Transform values of the object
+    /// </summary>
+    /// <param name="obj">The object whose Transform value is going to be saved</param>
+    /// <param name="pos">The position to save</param>
+    /// <param name="rot">The rotation (Quaternion) to save</param>
+    /// <param name="scale">The scale to save</param>
     public void SaveTransformValue(GameObject obj, Vector3 pos, Quaternion rot, Vector3 scale)
     {
         if(!savedTransform.ContainsKey(obj))
@@ -68,7 +79,12 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         }
 
     }
-    
+
+    /// <summary>
+    /// Retrieve the currently saved Transform value
+    /// </summary>
+    /// <param name="obj">The object which we need to retrieve the Transform values for</param>
+    /// <returns>The <c>SavedTransform</c> structure which holds the saved Transform values</returns>
     public SavedTransform GetTransformValue(GameObject obj)
     {
         SavedTransform returnValue = new SavedTransform(Vector3.zero, Quaternion.identity, Vector3.zero);
@@ -76,6 +92,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         return returnValue;
     }
 
+    /// <summary>
+    /// Saves the BoxExtends values of the object
+    /// </summary>
+    /// <param name="obj">The object whose Transform value is going to be saved</param>
+    /// <param name="ext">The Bxtends to save</param>
     public void SaveBoxExtends(GameObject obj, Vector3 ext)
     {
         if (!savedBoxExtends.ContainsKey(obj))
@@ -88,6 +109,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         }
     }
 
+    /// <summary>
+    /// Retrieve the currently saved BoxExtends values
+    /// </summary>
+    /// <param name="obj">The object which we need to retrieve the BoxExtends values for</param>
+    /// <returns>The saved BoxExtends values</returns>
     public Vector3 GetBoxExtends(GameObject obj)
     {
         Vector3 returnValue = Vector3.one;
@@ -95,6 +121,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         return returnValue;
     }
 
+    /// <summary>
+    /// Saves the current scale of the mini scene (the scene on the platform dock)
+    /// </summary>
+    /// <param name="obj">The object in the mini scene</param>
+    /// <param name="scale">The mini scene scale value to save</param>
     public void SaveMiniSceneScale(GameObject obj, Vector3 scale)
     {
         if (!savedMiniSceneScale.ContainsKey(obj))
@@ -107,6 +138,12 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         }
     }
 
+
+    /// <summary>
+    /// Retrieve the mini scene scale for a givent object (the object which was in that mene scene)
+    /// </summary>
+    /// <param name="obj">The object which we need to get the mini scene scale for</param>
+    /// <returns>The mini scene scale</returns>
     public Vector3 GetMiniSceneScale(GameObject obj)
     {
         Vector3 returnValue = Vector3.one;
@@ -114,6 +151,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         return returnValue;
     }
 
+    /// <summary>
+    /// Saves the projected geometry of the current platform dock geometry
+    /// </summary>
+    /// <param name="dockGeometry">The docked geometry whose projected geometry needs to be saved</param>
+    /// <param name="projectedGeometry">The projected geometry to save</param>
     public void SaveProjectedGeometry(GameObject dockGeometry, GameObject projectedGeometry)
     {
         if (!savedProjectedGeometry.ContainsKey(dockGeometry))
@@ -125,6 +167,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         }
     }
 
+    /// <summary>
+    /// Retrieve the projected geometry associated to the given object
+    /// </summary>
+    /// <param name="dockGeometry">The object which we need to get the projected geometry for</param>
+    /// <returns>The reference to the projected geometry</returns>
     public GameObject GetProjectedGeometry(GameObject dockGeometry)
     {
         GameObject returnValue = new GameObject();
@@ -132,6 +179,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         return returnValue;
     }
 
+    /// <summary>
+    /// Saves the slider related to the object
+    /// </summary>
+    /// <param name="dockGeometry">The object whose slider is going to be saved</param>
+    /// <param name="slider">The slider to save</param>
     public void SaveSliderObject(GameObject dockGeometry, GameObject slider)
     {
         if (!savedSliderObject.ContainsKey(dockGeometry))
@@ -144,6 +196,11 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         }
     }
 
+    /// <summary>
+    /// Retrieve the saved slider for an object
+    /// </summary>
+    /// <param name="dockGeometry">The object which we need to retrieve the slider for</param>
+    /// <returns>The saved slider</returns>
     public GameObject GetSliderObject(GameObject dockGeometry)
     {
         GameObject returnValue = new GameObject();
@@ -151,11 +208,19 @@ public class GeometryStatusSaver : Singleton<GeometryStatusSaver>
         return returnValue;
     }
 
+    /// <summary>
+    /// Remove the slider object for a given geometry
+    /// </summary>
+    /// <param name="dockGeometry">The geometry whose slider we want to delete</param>
     public void RemoveSliderObject(GameObject dockGeometry)
     {
         savedSliderObject.Remove(dockGeometry);
     }
 
+    /// <summary>
+    /// Removes all saved values and reference for a givend geoemtry
+    /// </summary>
+    /// <param name="obj">The geometry whose saved values we want to delete</param>
     public void RemoveAllObjectValues(GameObject obj)
     {
         if (savedTransform.ContainsKey(obj))

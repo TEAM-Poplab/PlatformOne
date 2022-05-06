@@ -68,37 +68,6 @@ public class PlatformPlaceholderMeshSequence : PlatformPlaceholder
         _instantiatedMainObject.GetComponent<MeshSequenceControllerImproved>().GetCurrentFrame().GetComponent<Outline>().enabled = true;
     }
 
-    ///// <inheritdoc/>
-    ///// <remarks>This overrides the single mesh method in order to support mesh sequence objects</remarks>
-    //protected override void InstantiateObjectAfterUnfreeze(GameObject geometry)
-    //{
-    //    _instantiatedObjectOrigin = new GameObject();
-    //    _instantiatedObjectOrigin.transform.parent = transform;
-    //    _instantiatedObjectOrigin.name = "GeometryOrigin";
-    //    _instantiatedMainObject = Instantiate(geometry, _instantiatedObjectOrigin.transform);
-
-    //    _instantiatedObjectOrigin.transform.localPosition = geometry.GetComponent<PlatformableMeshSequence>().SavedOriginTransformUponFreeze.position;
-    //    _instantiatedObjectOrigin.transform.localScale = geometry.GetComponent<PlatformableMeshSequence>().SavedOriginTransformUponFreeze.scale;
-    //    _instantiatedObjectOrigin.transform.localRotation = geometry.GetComponent<PlatformableMeshSequence>().SavedOriginTransformUponFreeze.rotation;
-
-    //    _instantiatedMainObject.transform.localPosition = GeometryStatusSaver.Instance.GetTransformValue(geometry.transform.parent.gameObject).position;
-    //    _instantiatedMainObject.transform.localScale = GeometryStatusSaver.Instance.GetTransformValue(geometry.transform.parent.gameObject).scale;
-    //    _instantiatedMainObject.transform.localRotation = GeometryStatusSaver.Instance.GetTransformValue(geometry.transform.parent.gameObject).rotation;
-
-    //    _instantiatedMainObject.GetComponent<Dockable>().enabled = false;
-    //    _instantiatedMainObject.GetComponent<PlatformableMeshSequence>().typeOfGeometry = Platformable.GeometryType.Sequence;
-    //    _instantiatedMainObject.GetComponent<PlatformableMeshSequence>().enabled = false;
-    //    _instantiatedMainObject.GetComponent<Collider>().enabled = false;
-    //    _instantiatedMainObject.GetComponent<CustomBoundsControl>().enabled = false;
-    //    _instantiatedMainObject.GetComponent<ValueLabelsVisualizer>().enabled = false;
-    //    _instantiatedMainObject.GetComponent<MeshSequenceControllerImproved>().Setup();
-    //    _instantiatedMainObject.GetComponent<MeshSequenceControllerImproved>().ChangeMaterialToMeshes(GameManager.Instance.LightStatus == GameManager.GameLight.DAY ? realityOnMaterial : realityOffMaterial);
-    //    _instantiatedMainObject.GetComponent<MeshSequenceControllerImproved>().ChangeShadowCastingModeToMeshes(GameManager.Instance.LightStatus == GameManager.GameLight.DAY ? true : false);
-    //    //_instantiatedMainObject.transform.GetChild(0).transform.localRotation = _instantiatedMainObject.GetComponent<Dockable>().OriginalRotation;
-    //    _instantiatedMainObject.GetComponent<MeshSequenceControllerImproved>().GetCurrentFrame().GetComponent<Animator>().enabled = true;
-    //    _instantiatedMainObject.GetComponent<MeshSequenceControllerImproved>().GetCurrentFrame().GetComponent<Animator>().SetTrigger("Swap");
-    //}
-
     /// <inheritdoc/>
     /// <remarks>This overrides the single mesh method in order to support mesh sequence objects</remarks>
     protected override void InstantiateObjectAfterUnfreeze(GameObject geometry)

@@ -29,6 +29,10 @@ public class SelectorDockPosition : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// This method shows the saved geometry at position <c>index</c>
+    /// </summary>
+    /// <param name="index">The index in the geoemtries list of the geometry to show in the selector</param>
     public void VisualizeGeometryByIndex(int index)
     {
         if (currentViewedGeometry == null)
@@ -47,6 +51,10 @@ public class SelectorDockPosition : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method shows the saved geometry whose name is <c>name</c>
+    /// </summary>
+    /// <param name="name">The name in the geoemtries list of the geometry to show in the selector</param>
     public void VisualizeGeometryByName(string name)
     {
         for (int i = 0; i < savedGeometries.Count; i++)
@@ -75,6 +83,10 @@ public class SelectorDockPosition : MonoBehaviour
         Debug.LogError($"No geometry with name {name} in the collection");
     }
 
+    /// <summary>
+    /// This method shows the saved geometry by reference
+    /// </summary>
+    /// <param name="obj">The object reference in the geoemtries list of the geometry to show in the selector</param>
     public void VisualizeGeometryByObject(GameObject obj)
     {
         int i = savedGeometries.IndexOf(obj);
@@ -103,6 +115,10 @@ public class SelectorDockPosition : MonoBehaviour
     }
 
     #region Public methods (for interaction with the class)
+    /// <summary>
+    /// This method add a new geometry to the list of the geometries that this Selector holds
+    /// </summary>
+    /// <param name="geometry">The geometry to add</param>
     public void AddGeometry(GameObject geometry)
     {
         savedGeometries.Add(geometry);
@@ -110,6 +126,10 @@ public class SelectorDockPosition : MonoBehaviour
         CustomEvent.Trigger(transform.GetChild(0).GetChild(1).gameObject, "UpdateGeometryList");
     }
 
+    /// <summary>
+    /// This method removes a geometry from the list of the geometries that this Selector holds
+    /// </summary>
+    /// <param name="geometry">The geometry to remove</param>
     public void RemoveGeometry(GameObject geometry)
     {
         savedGeometries.Remove(geometry);
@@ -130,6 +150,10 @@ public class SelectorDockPosition : MonoBehaviour
     #endregion
 
     #region Coroutines
+    /// <summary>
+    /// The coroutine properly initialize the selector dock by visualizing the first geometry in the list
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator InitializeDockPosition()
     {
         yield return new WaitForSeconds(1.5f);

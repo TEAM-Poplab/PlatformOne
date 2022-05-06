@@ -55,6 +55,7 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
 
     [HideInInspector] public UnityEvent dockIsVisible = new UnityEvent();   //Used in PlatformLocomotion class to save dock position only when it becomes visible
 
+    #region Properties for active elements
     public bool IsUserMenuActive
     {
         get { return isUserMenuActive; }
@@ -84,6 +85,7 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         get => isGridManagerActive;
         private set => isGridManagerActive = value;
     }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -93,18 +95,6 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         dcm = GameObject.Find("TimeManager").GetComponent<DigitalClockManager>();
         dockObject.transform.localPosition = dockPositionWhileHidden;
         platformDock = GameObject.Find("GuardianCenter/Dock/PlatformDockPosition");
-        //platformDock.GetComponent<PlatformDockPosition>().onObjectPlatformed.AddListener(gameobject => {
-        //    labelsButton.SetActive(true);
-        //    labelsButton.transform.parent.GetComponent<GridObjectCollection>().UpdateCollection(); });
-        //platformDock.GetComponent<PlatformDockPosition>().onObjectPlatformedMS.AddListener(gameobject => {
-        //    labelsButton.SetActive(true);
-        //    labelsButton.transform.parent.GetComponent<GridObjectCollection>().UpdateCollection(); });
-        //platformDock.GetComponent<PlatformDockPosition>().onObjectUnplatformed.AddListener(() => {
-        //    labelsButton.SetActive(false);
-        //    labelsButton.transform.parent.GetComponent<GridObjectCollection>().UpdateCollection(); });
-        //platformDock.GetComponent<PlatformDockPosition>().onObjectUnplatformedMS.AddListener(() => {
-        //    labelsButton.SetActive(false);
-        //    labelsButton.transform.parent.GetComponent<GridObjectCollection>().UpdateCollection(); });
         HideDock();
     }
 
@@ -144,21 +134,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
                     wasAutoincreaseEnabled = false;
                     dcm.StopAutoIncrease();
                 }
-                //if (digitalClockObject.activeSelf)
-                //{
-                //    digitalClockButton.ButtonPressed.Invoke();
-                //}
                 break;
             case GameManager.GameLight.NIGHT:
                 GameManager.Instance.SetDaylight(true);
-                //if (isClockActive)
-                //{
-                //    digitalClockObject.SetActive(true);
-                //    //dcm.StopAutoIncrease();
-                //} else
-                //{
-                //    //dcm.StartAutoIncrease();
-                //}
                 if (wasAutoincreaseEnabled)
                 {
                     dcm.StartAutoIncrease();
@@ -167,13 +145,15 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         }
     }
 
+    /// <summary>
+    /// Shows/Hides the Dock object
+    /// </summary>
     public void DockHandler()
     {
         switch (isDockActive)
         {
             case true:
                 HideDock();
-                //dockButtonText.color = new Color32(128, 128, 128, 255);
                 break;
             case false:
                 if (isNavigationActive)
@@ -185,11 +165,13 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
                     GameObject.Find("UserMenu/NearMenu2x4(Clone)/ButtonCollection/PressableButtonHoloLens2ToggleRadio_32x96(Clone) (1)").GetComponent<PressableButtonHoloLens2>().ButtonPressed.Invoke();
                 }
                 ShowDock();
-                //dockButtonText.color = new Color32(255, 255, 255, 255);
                 break;
         }
     }
 
+    /// <summary>
+    /// Handles the visibility of the clock object
+    /// </summary>
     public void ClockHandler()
     {
         switch (digitalClockObject.activeSelf)
@@ -215,6 +197,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         }
     }
 
+    /// <summary>
+    /// Enables the visibility of the clock buttons
+    /// </summary>
     public void ShowClockButtons()
     {
         foreach(GameObject button in clockButtons)
@@ -223,6 +208,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         }
     }
 
+    /// <summary>
+    /// Disable the visibility of the clock buttons
+    /// </summary>
     public void HideClockButtons()
     {
         foreach (GameObject button in clockButtons)
@@ -231,12 +219,18 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         }
     }
 
+    /// <summary>
+    /// Exit method
+    /// </summary>
     public void ExitHandler()
     {
         ScenesManager.Instance.LoadLevelSelectionScene();
         ScenesManager.Instance.ActivateScene();
     }
 
+    /// <summary>
+    /// Disable the visibility of the Dock and properly set any related element
+    /// </summary>
     public void HideDock()
     {
         dockObject.GetComponent<Orbital>().enabled = false;
@@ -249,6 +243,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         isDockActive = false;
     }
 
+    /// <summary>
+    /// Enable the visibility of the Dock and properly set any related element
+    /// </summary>
     public void ShowDock()
     {
         //dockObject.GetComponent<Orbital>().enabled = true;
@@ -259,6 +256,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         //dockIsVisible.Invoke();
     }
 
+    /// <summary>
+    /// Handles the visibility of the diagnostic panel
+    /// </summary>
     public void DiagnosticHandler()
     {
         switch (diagnostics.activeSelf)
@@ -272,6 +272,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         }
     }
 
+    /// <summary>
+    /// The method handles the visibility of the navigation panel used to move the platform
+    /// </summary>
     public void NavigationHandler()
     {
         switch (navigationObject.activeSelf)
@@ -295,6 +298,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         }
     }
 
+    /// <summary>
+    /// Shows or hides the labels visibility (for custom object transform handles, the slider and buttons)
+    /// </summary>
     public void LabelsHandler()
     {
         switch(areLabelsActive)
@@ -320,6 +326,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         }
     }
 
+    /// <summary>
+    /// Call the freeze method on the currently platformed geometry, which properly handles any freeze system setup
+    /// </summary>
     public void FreezeGeometry()
     {
         if (platformDock.GetComponent<PlatformDockPosition>().PlatformedObject.transform.GetChild(0).childCount == 0)
@@ -331,6 +340,9 @@ public class UIManagerForUserMenuMRTKWithoutButtons : Singleton<UIManagerForUser
         }
     }
 
+    /// <summary>
+    /// Shows or hides the grid visualization
+    /// </summary>
     public void GridManagerHandler()
     {
         switch(isGridManagerActive)

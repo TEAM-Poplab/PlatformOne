@@ -6,6 +6,9 @@ using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Utilities.Solvers;
 using TMPro;
 
+/// <summary>
+/// This class handles the visualization of the platform dock slider, which will control the animation value of the platform dock geometry
+/// </summary>
 public class SliderManager : Singleton<SliderManager>
 {
     [SerializeField][Tooltip("Prefab for the slider, properly set with any necessary component. The pref should include che tooltip")]
@@ -35,6 +38,10 @@ public class SliderManager : Singleton<SliderManager>
         
     }
 
+    /// <summary>
+    /// Called whenever a new object has just been docked in the platform dock, making the slider active and connecting it to the animation parameter of the geometry
+    /// </summary>
+    /// <param name="platformedObject">The object which has been docked in the platform dock</param>
     protected virtual void OnObjectMSPlatformed(GameObject platformedObject)
     {
         currentSlider = Instantiate(sliderPrefab, sliderPlaceholderPosition);
@@ -45,24 +52,37 @@ public class SliderManager : Singleton<SliderManager>
         GeometryStatusSaver.Instance.SaveSliderObject(platformedObject.transform.parent.gameObject, currentSlider);
     }
 
+    /// <summary>
+    /// Called whenever a docked object has just been removed from the platform dock, destroying the current slider
+    /// </summary>
     protected virtual void OnObjectMSUnplatformed()
     {
         Destroy(currentSlider);
         currentSlider = null;
     }
 
+    /// <summary>
+    /// Coroutine to wait the full docking of the object (after all animations, docking and projection process) before connecting the slider to the animation value changer
+    /// </summary>
+    /// <returns></returns>
     protected virtual IEnumerator WaitToConnectSlider()
     {
         yield return new WaitForSeconds(1.1f);
         currentSlider.transform.GetChild(0).GetChild(1).GetChild(0).gameObject.GetComponent<PinchSlider>().OnValueUpdated.AddListener(platformPlaceholderMS.InstantiatedMainObject.GetComponent<MeshSequenceControllerImproved>().OnValueChange);
     }
 
+    /// <summary>
+    /// Handles the visibility of the slider when an object is docked in the platform dock and the dock itself is being hidden
+    /// </summary>
     public virtual void OnDockHidden()
     {
         if (currentSlider != null)
             sliderPlaceholderPosition.GetComponent<RadialView>().enabled = false;
     }
 
+    /// <summary>
+    /// Handles the visibility of the slider when an object is docked in the platform dock and the dock itself is being showed after being hidden
+    /// </summary>
     public virtual void OnDockShowed()
     {
         if (currentSlider != null)

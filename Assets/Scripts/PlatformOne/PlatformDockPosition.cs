@@ -8,6 +8,10 @@ using Microsoft.MixedReality.Toolkit.UI;
 using Bolt;
 using Ludiq;
 
+/// <summary>
+/// The class <c>PlatformDockPosition</c> is used to identify which objects is currently docked in the projection Dock and it makes available some useful events
+/// that can be called by the docked object
+/// </summary>
 public class PlatformDockPosition : MonoBehaviour
 {
     [SerializeField]

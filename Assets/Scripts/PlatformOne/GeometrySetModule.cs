@@ -20,9 +20,6 @@ public class GeometrySetModule : MonoBehaviour
     [SerializeField]
     protected GameObject centroidPrefab;
 
-    //[SerializeField]
-    //protected GameObject centroidNormcorePrefab;
-
     protected Dock dockObject;
 
     protected Realtime NormcoreManagerRealtime;

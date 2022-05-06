@@ -4,6 +4,10 @@ using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using UnityEngine.SceneManagement;
 
+///<summary>
+///The class handles the communication between the time multiplier slider and the clock system
+///</summary>
+
 [RequireComponent(typeof(DigitalClockManager))]
 public class TimeMultiplierSlider : MonoBehaviour
 {
@@ -28,12 +32,10 @@ public class TimeMultiplierSlider : MonoBehaviour
         CheckSliderValue(slider.GetComponent<PinchSlider>().SliderValue);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Called whenever the slider value has changed, it passes the slider new data and processes all necessary information to update the clock accordingly
+    /// </summary>
+    /// <param name="data">The <see cref="PinchSlider"/> event data</param>
     public void OnSliderValueChange(SliderEventData data)
     {
         if (data.NewValue >= 0 && data.NewValue < 0.25f)
@@ -99,6 +101,11 @@ public class TimeMultiplierSlider : MonoBehaviour
         clmComponent.autoSpeedMultiplier = sliderMultiplier;
     }
 
+    /// <summary>
+    /// Called whenever the slider value has changed, it passes the slider new data and processes all necessary information to update the clock accordingly.
+    /// Similar to <see cref="OnSliderValueChange(SliderEventData)"/>, but it uses a direct float input value
+    /// </summary>
+    /// <param name="val">The new float value of a generic slider</param>
     private void CheckSliderValue(float val)
     {
         if (val >= 0 && val < 0.25f)

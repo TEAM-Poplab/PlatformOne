@@ -123,6 +123,9 @@ public class FreezeGeometries : Singleton<FreezeGeometries>, MATKPointerResponde
         unfrozenGeometryEvent.Invoke();
     }
 
+    /// <summary>
+    /// Change the material to the frozen geometries in order to differentiate them from currently active and manipulable geometries
+    /// </summary>
     public virtual void ChangeMaterialToFrozenGeometries()
     {
         foreach (GameObject obj in frozenGeometries)
@@ -220,37 +223,7 @@ public class FreezeGeometries : Singleton<FreezeGeometries>, MATKPointerResponde
 
     #region Coroutines
     /// <summary>
-    /// Animates the frozen geometry towards the first free dock space before destrying it
-    /// </summary>
-    /// <param name="obj">The frozen instance of a projected object which is going to be animated and removed</param>
-    /// <returns></returns>
-    //protected IEnumerator AnimationBeforeDestroy(GameObject obj)
-    //{
-    //    Vector3 dest = platformDock.transform.position;
-    //    foreach (DockPosition dp in dockObject.DockPositions)
-    //    {
-    //        if (!dp.IsOccupied)
-    //        {
-    //            dest = dp.transform.position;
-    //            break;
-    //        }
-    //    }
-    //    while (true)
-    //    {
-    //        obj.transform.localScale = Solver.SmoothTo(obj.transform.localScale, Vector3.zero, Time.deltaTime, 0.15f);
-    //        obj.transform.position = Solver.SmoothTo(obj.transform.position, dest, Time.deltaTime, 0.15f);
-
-    //        if (AboutTheSameSize(Vector3.zero.x, obj.transform.localScale.x))
-    //        {
-    //            Destroy(obj);
-    //            yield break;
-    //        }
-    //        yield return null;
-    //    }
-    //}
-
-    /// <summary>
-    /// Animates the frozen geometry towards the platformable (projection) dock space before destrying it
+    /// Animates the frozen geometry towards the platformable (projection) dock space before destroying it
     /// </summary>
     /// <param name="obj">The frozen instance of a projected object which is going to be animated and removed</param>
     /// <returns></returns>
@@ -410,23 +383,12 @@ public class FreezeGeometries : Singleton<FreezeGeometries>, MATKPointerResponde
     #endregion
 
     #region Events response methods
+    /// <summary>
+    /// Called when the <see cref="MATKPointer"/> is currently selecting a frozen geometry
+    /// </summary>
+    /// <param name="geometry">The current selected geometry by the pointer</param>
     public void GeometryOnFocus(GameObject geometry)
     {
-        //if (!currentselectedGeometryOverlay.activeSelf)
-        //{
-        //    currentselectedGeometryOverlay.GetComponent<MeshFilter>().sharedMesh = geometry.GetComponent<MeshCollider>().sharedMesh;
-        //    currentselectedGeometryOverlay.GetComponent<MeshRenderer>().material = materialWhenSelectedByPointer;
-        //    currentselectedGeometryOverlay.GetComponent<MeshRenderer>().material.SetColor("_Color", selectionInMaterialColor);
-        //    currentselectedGeometryOverlay.transform.position = geometry.transform.position;
-        //    currentselectedGeometryOverlay.transform.rotation = geometry.transform.rotation;
-        //    currentselectedGeometryOverlay.transform.localScale = geometry.transform.lossyScale*1.01f;
-        //    currentselectedGeometryOverlay.SetActive(true);
-
-        //    if (selectionAnimationOnFocus == null)
-        //    {
-        //        selectionAnimationOnFocus = StartCoroutine(animateSelectionOverlayIn(geometry));
-        //    }
-        //}
         GameObject overlay;
         if (geometry.transform.parent.childCount > 1)
         {
@@ -440,11 +402,12 @@ public class FreezeGeometries : Singleton<FreezeGeometries>, MATKPointerResponde
             overlay.SetActive(true);
             Coroutine currentCoroutine = null;
             coroutinesList.TryGetValue(geometry, out currentCoroutine);
-            if (currentCoroutine == null) //Nessuna coroutine in corso per questo oggetto, quindi siccome attivo la selezione avvio la coroutine di animazione ingresso
+            if (currentCoroutine == null) //No running coroutine for this object, so since the selection is disabled I can start the intro animation coroutine
             {
                 coroutinesList.Add(geometry, StartCoroutine(animateSelectionOverlayIn(geometry, overlay)));
 
-            } else //Una qualche coroutine in corso per l'oggetto selezionato, quindi la blocco e avvio quella di selezione
+            }
+            else //Any one running coroutine for the selected object, so I stop it and I start the selection one
             {
                 StopCoroutine(coroutinesList[geometry]);
                 coroutinesList[geometry] = StartCoroutine(animateSelectionOverlayIn(geometry, overlay));
@@ -452,25 +415,12 @@ public class FreezeGeometries : Singleton<FreezeGeometries>, MATKPointerResponde
         }
     }
 
+    /// <summary>
+    /// Called when the <see cref="MATKPointer"/> loose focus on a frozen geometry
+    /// </summary>
+    /// <param name="geometry">The geometry selected until a moment before</param>
     public void GeometryOnLostFocus(GameObject geometry)
     {
-        //if (currentselectedGeometryOverlay.activeSelf)
-        //{
-        //    if (selectionAnimationLostFocus == null)
-        //    {
-        //        if (selectionAnimationOnFocus != null)
-        //        {
-        //            StopCoroutine(selectionAnimationOnFocus);
-        //            geometry.transform.GetChild(0).GetComponent<MeshRenderer>().material = selectedGeometryOriginalMaterial;
-        //            currentselectedGeometryOverlay.SetActive(false);
-        //            previousSelectedGeometry = null;
-        //            selectionAnimationLostFocus = null;
-        //        } else
-        //        {
-        //            selectionAnimationLostFocus = StartCoroutine(animateSelectionOverlayOut(geometry));
-        //        }
-        //    }
-        //}
         GameObject overlay;
         if (geometry.transform.parent.childCount > 1)
         {
@@ -484,12 +434,12 @@ public class FreezeGeometries : Singleton<FreezeGeometries>, MATKPointerResponde
         {
             Coroutine currentCoroutine = null;
             coroutinesList.TryGetValue(geometry, out currentCoroutine);
-            if (currentCoroutine == null) //Nessuna coroutine in corso per questo oggetto, quindi siccome disattivo la selezione avvio la coroutine di animazione uscita
+            if (currentCoroutine == null) //No running coroutine for this object, so since the selection is disabled I can start the outro animation coroutine
             {
                 coroutinesList.Add(geometry, StartCoroutine(animateSelectionOverlayOut(geometry, overlay)));
 
             }
-            else //Una qualche coroutine in corso per l'oggetto selezionato, quindi la blocco e avvio quella di selezione
+            else //Any one running coroutine for the selected object, so I stop it and I start the selection one
             {
                 StopCoroutine(coroutinesList[geometry]);
                 coroutinesList[geometry] = StartCoroutine(animateSelectionOverlayOut(geometry, overlay));

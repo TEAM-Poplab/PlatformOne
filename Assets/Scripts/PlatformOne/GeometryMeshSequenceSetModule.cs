@@ -28,10 +28,6 @@ public class GeometryMeshSequenceSetModule : GeometrySetModule
     [Tooltip("Custom prefab for a mesh sequence object, properly set with all necessary Components")]
     protected GameObject meshSequenceCentroidPefab;
 
-    //[SerializeField]
-    //[Tooltip("Custom prefab for a mesh sequence object with Normcore Realtime components, properly set with all necessary Components")]
-    //protected GameObject meshSequenceCentroidNormcorePefab;
-
     public Material importedMeshMaterial;
     public int meshSequenceDefaultIndex = 1;
 
@@ -151,51 +147,6 @@ public class GeometryMeshSequenceSetModule : GeometrySetModule
     /// <summary>
     /// Loads all mesh sequence geometries instantiated, and sets them into the dock, if any position is available
     /// </summary>
-    //protected void LoadMeshSequenceGeometries()
-    //{
-    //    foreach (GameObject geometry in meshSequenceGeometries)
-    //    {
-    //        // TODO: removable if not working
-    //        //foreach(Transform trs in geometry.transform.GetChild(0))
-    //        //{
-    //        //    var tmp = new GameObject(trs.GetChild(0).name);
-    //        //    tmp.transform.SetParent(trs);
-    //        //    tmp.AddComponent<MeshFilter>().mesh = trs.GetChild(0).gameObject.GetComponent<MeshFilter>().mesh;
-    //        //    Material[] mt = tmp.AddComponent<MeshRenderer>().materials;
-    //        //    mt[0] = importedMeshMaterial;
-    //        //    tmp.GetComponent<MeshRenderer>().materials = mt;
-    //        //    Destroy(trs.GetChild(0).gameObject);
-    //        //}
-
-
-    //        if (SetNewGeometry(geometry, meshSequenceCentroidPefab) == 1)
-    //        {
-    //            Debug.LogError($"Unable to correctly instantiate the new geometry {geometry.name}. Unknown error. Try again");
-    //        }
-    //        _geometryCentroid.GetComponent<BoxCollider>().size = CheckMaxBoundsSizeInSequence(geometry);
-    //        RecenterCentroid(_geometryCentroid, instanceGeometry);
-    //        _geometryCentroid.GetComponent<MeshSequenceControllerImproved>().Setup();
-
-    //        //Destroy the mesh sequence gameobject created previously, or it'll be duplicated
-    //        Destroy(geometry);
-
-    //        foreach (DockPosition dp in dockObject.DockPositions)
-    //        {
-    //            if (!dp.IsOccupied)
-    //            {
-    //                _geometryCentroid.GetComponent<Dockable>().Dock(dp);
-    //                StartCoroutine(AdjustSize(_geometryCentroid));
-    //                break;
-    //            }
-    //        }
-
-    //        ResetValues();
-    //    }
-    //}
-
-    /// <summary>
-    /// Loads all mesh sequence geometries instantiated, and sets them into the dock, if any position is available
-    /// </summary>
     protected void LoadMeshSequenceGeometries()
     {
         foreach (GameObject obj in meshSequenceGeometriesPrefabs)
@@ -220,16 +171,6 @@ public class GeometryMeshSequenceSetModule : GeometrySetModule
             Destroy(main);
 
             //Default: goest first on dock, then on library
-            //foreach (DockPosition dp in dockObject.DockPositions)
-            //{
-            //    if (!dp.IsOccupied)
-            //    {
-            //        _geometryCentroid.GetComponent<Dockable>().Dock(dp);
-            //        _geometryCentroid.GetComponent<Dockable>().BlockScaleToFit = true;
-            //        //StartCoroutine(AdjustSize(_geometryCentroid));
-            //        break;
-            //    }
-            //}
             if (_geometryCentroid.GetComponent<Dockable>().CanDock)
             {
                 dockObject.transform.GetComponentInChildren<SelectorDockPosition>().AddGeometry(_geometryCentroid);
@@ -254,21 +195,10 @@ public class GeometryMeshSequenceSetModule : GeometrySetModule
             GameObject geometry = Instantiate(obj, main.transform);
             geometry.transform.localScale = Vector3.one;
 
-            //if (NormcoreManagerRealtime.clientID == 0)
-            //{
-            //    if (SetNewGeometry(main, meshSequenceCentroidNormcorePefab, true) == 1)
-            //    {
-            //        Debug.LogError($"Unable to correctly instantiate the new geometry {geometry.name}. Unknown error. Try again");
-            //    }
-            //    _geometryCentroid.GetComponent<RealtimeMeshSequenceController>().SetName(_geometryCentroid.name);
-            //}
-            //else
-            //{
-                if (SetNewGeometry(main, meshSequenceCentroidPefab) == 1)
-                {
-                    Debug.LogError($"Unable to correctly instantiate the new geometry {geometry.name}. Unknown error. Try again");
-                }
-            //}
+            if (SetNewGeometry(main, meshSequenceCentroidPefab) == 1)
+            {
+               Debug.LogError($"Unable to correctly instantiate the new geometry {geometry.name}. Unknown error. Try again");
+            }
 
 
             _geometryCentroid.GetComponent<MeshSequenceControllerImproved>().Setup();
@@ -278,16 +208,6 @@ public class GeometryMeshSequenceSetModule : GeometrySetModule
             Destroy(main);
 
             //Default: goest first on dock, then on library
-            //foreach (DockPosition dp in dockObject.DockPositions)
-            //{
-            //    if (!dp.IsOccupied)
-            //    {
-            //        _geometryCentroid.GetComponent<Dockable>().Dock(dp);
-            //        _geometryCentroid.GetComponent<Dockable>().BlockScaleToFit = true;
-            //        //StartCoroutine(AdjustSize(_geometryCentroid));
-            //        break;
-            //    }
-            //}
             if (_geometryCentroid.GetComponent<Dockable>().CanDock)
             {
                 dockObject.transform.GetComponentInChildren<SelectorDockPosition>().AddGeometry(_geometryCentroid);

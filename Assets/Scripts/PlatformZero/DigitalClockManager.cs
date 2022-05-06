@@ -343,14 +343,8 @@ public class DigitalClockManager : MonoBehaviour
     {
         while (Application.isPlaying)
         {
-            //ClockwiseCycleCheck();
-            //UnclockwiseCycleCheck();
-            //TMPComponent.text = DigitFormatter(_hours) + " : " + DigitFormatter(_minutes);
             TMPColumnComponent.text = ":";
             yield return new WaitForSeconds(0.5f);
-            //ClockwiseCycleCheck();
-            //UnclockwiseCycleCheck();
-            //TMPComponent.text = DigitFormatter(_hours) + "   " + DigitFormatter(_minutes);
             TMPColumnComponent.text = "";
             yield return new WaitForSeconds(0.5f);
         }
@@ -508,16 +502,6 @@ public class DigitalClockManager : MonoBehaviour
 
     // Prerequisite: the interaction occurs with a button object.
     // Method called when the increase button has just been pressed: it calls all propers coroutine to start checking the single or long pression
-    //public void SetLongIncreasePressTrue()
-    //{
-    //    clockAudioSource.clip = increaseAudioClip;
-    //    //_isLongIncreasePressed = true;
-    //    _minutes = FindNearestFiveClockwise(_minutes);
-    //    //StartCoroutine(OnButtonPressIncrease());
-    //}
-
-    // Prerequisite: the interaction occurs with a button object.
-    // Method called when the increase button has just been pressed: it calls all propers coroutine to start checking the single or long pression
     // Version based on angles instead of actual time
     public void SetLongIncreasePressTrue()
     {
@@ -542,23 +526,6 @@ public class DigitalClockManager : MonoBehaviour
             clockAudioSource.Stop();
         }
     }
-
-    // Prerequisite: the interaction occurs with a button object.
-    // Method called when the decrease button has just been pressed: it calls all propers coroutine to start checking the single or long pression
-    //public void SetLongDecreasePressTrue()
-    //{
-    //    clockAudioSource.clip = decreaseAudioClip;
-
-    //    if (_minutes == 0)
-    //    {
-    //        DecreaseTime();
-    //    }
-
-    //    _minutes = FindNearestFiveUnclockwise(_minutes);
-
-    //    //_isLongDecreasePressed = true;
-    //    //StartCoroutine(OnButtonPressDecrease());
-    //}
 
     // Prerequisite: the interaction occurs with a button object.
     // Method called when the decrease button has just been pressed: it calls all propers coroutine to start checking the single or long pression

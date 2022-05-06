@@ -4,6 +4,9 @@ using UnityEngine;
 using Ludiq;
 using Bolt;
 
+/// <summary>
+/// This class allows the platform to move according to the direction given by the user using the directional buttons
+/// </summary>
 public class PlatformLocomotion : MonoBehaviour
 {
     #region Properties and public fields
@@ -91,6 +94,7 @@ public class PlatformLocomotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Check if any console button is pressed
         if ((bool)Variables.Object(forwardButton).Get("Pressed"))
         {
             MoveForward();
@@ -295,30 +299,12 @@ public class PlatformLocomotion : MonoBehaviour
         MoveBackward();
     }
 
+    /// <summary>
+    /// This coroutine gradually stops the platform mmovement, smoothly lerping from the current velocity to the stop status
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator smoothStop()
     {
-        //var motionDir = platformPreviousDirection.normalized * motionStep * timeMultiplier * inertiaWhenStopping;
-        //var startPosition = platform.transform.position;
-        //var targetPosition = motionDir + startPosition;
-        //Vector3 previousPosition = platform.transform.position;
-        ////float t = Time.deltaTime * inertiaWhenStopping;
-        //float t = 0;
-        //float timeElapsed = 0;
-        //float lerpDuration = 1f;
-        //while (timeElapsed < lerpDuration)
-        //{
-        //    platform.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-        //    playspace.transform.position += platform.transform.position - previousPosition;
-        //    dock.transform.position += platform.transform.position - previousPosition;
-        //    foreach (GameObject go in otherMoveableObjects)
-        //    {
-        //        go.transform.position += platform.transform.position - previousPosition;
-        //    }
-        //    previousPosition = platform.transform.position;
-        //    timeElapsed += Time.deltaTime;
-        //    yield return null;
-        //}
-
         Vector3 previousPosition = platform.transform.position;
         float timeMultiplierStartValue = timeMultiplier;
         timeMultiplierInCoroutine = timeMultiplierStartValue;

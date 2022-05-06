@@ -75,7 +75,6 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        //DontDestroyOnLoad(gameObject);
         _directionalLight = GameObject.Find("Directional Light").GetComponent<Light>();
         //_pointLight = GameObject.Find("Point Light").GetComponent<Light>();
         RenderSettings.sun = _directionalLight;
@@ -107,24 +106,16 @@ public class GameManager : Singleton<GameManager>
         hand.GetComponent<Outline>().OutlineMode = Outline.Mode.SilhouetteOnly;
         hand.GetComponent<Outline>().enabled = true;
 
-        //lightChangeMenuObject.SetActive(false);
-        //OVRManager.display.RecenterPose();
-
         GameObject.Find("MixedRealityPlayspace/MRTK-Quest_OVRCameraRig(Clone)").GetComponent<OVRManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(_timer >= lightMenuDelay && lightChangeMenuObject.activeSelf == false)
-        //{
-        //    lightChangeMenuObject.SetActive(true);
-        //}
-
         if (_centerCameraAnchor == null)
         {
             _centerCameraAnchor = GameObject.Find("MixedRealityPlayspace/MRTK-Quest_OVRCameraRig(Clone)/TrackingSpace/CenterEyeAnchor");
-            SetCameraWithBeautify(_centerCameraAnchor, beautifyProfileLightsOff);
+            //SetCameraWithBeautify(_centerCameraAnchor, beautifyProfileLightsOff);
         }
 
         if (useAnalogClock)
