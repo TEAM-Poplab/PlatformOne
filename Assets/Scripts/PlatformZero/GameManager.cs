@@ -4,27 +4,27 @@
 *
 ************************************************************************************/
 
-using BeautifyEffect;
+//using BeautifyEffect;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using BeautifyEffect;
+//using BeautifyEffect;
 using System;
 using System.Runtime.CompilerServices;
 
 public class GameManager : Singleton<GameManager>
 {
     //[SerializeField] private Beautify beautifyScript;
-    [SerializeField]
-    [Tooltip("Beautify Profile for lights off scene")]
-    private BeautifyProfile beautifyProfileLightsOff;
+   // [SerializeField]
+    //[Tooltip("Beautify Profile for lights off scene")]
+    //private BeautifyProfile beautifyProfileLightsOff;
 
-    [SerializeField]
-    [Tooltip("Beautify Profile for lights on scene")]
-    private BeautifyProfile beautifyProfileLightsOn;
+    //[SerializeField]
+    //[Tooltip("Beautify Profile for lights on scene")]
+    //private BeautifyProfile beautifyProfileLightsOn;
 
     public GameObject fingerColliderPrefab;
     public GameObject lightChangeMenuObject;
@@ -147,15 +147,15 @@ public class GameManager : Singleton<GameManager>
      * @param {GameObject} cameraGO - The camera which the effect will be applied to
      * @param {BeautifyProfile} profile - The Beautify profile applied to the camera
      */
-    private void SetCameraWithBeautify(GameObject cameraGO, BeautifyProfile profile)
-    {
-        if (!cameraGO.GetComponent<Beautify>())
-            cameraGO.AddComponent<Beautify>();
+    //private void SetCameraWithBeautify(GameObject cameraGO, BeautifyProfile profile)
+    //{
+    //    if (!cameraGO.GetComponent<Beautify>())
+    //        cameraGO.AddComponent<Beautify>();
 
-        Beautify bf = cameraGO.GetComponent<Beautify>();
-        bf.profile = profile;
-        bf.quality = BEAUTIFY_QUALITY.BestPerformance;
-    }
+    //    Beautify bf = cameraGO.GetComponent<Beautify>();
+    //    bf.profile = profile;
+    //    bf.quality = BEAUTIFY_QUALITY.BestPerformance;
+    //}
 
     /*
      * Change the scene light status and set any light change event related
@@ -169,7 +169,7 @@ public class GameManager : Singleton<GameManager>
             //    _directionalLight.GetComponent<Animator>().SetBool("IsDay", false);
             _lightStatus = GameLight.NIGHT;
             _directionalLight.gameObject.SetActive(true);
-            SetCameraWithBeautify(_centerCameraAnchor, beautifyProfileLightsOff);
+            //SetCameraWithBeautify(_centerCameraAnchor, beautifyProfileLightsOff);
             RenderSettings.sun = _directionalLight;
             lmScript.useCustomLight = false;
             OnNightLightSet.Invoke();
@@ -179,7 +179,7 @@ public class GameManager : Singleton<GameManager>
             //    _directionalLight.GetComponent<Animator>().SetBool("IsDay", true);
             _lightStatus = GameLight.DAY;
             _directionalLight.gameObject.SetActive(false);
-            SetCameraWithBeautify(_centerCameraAnchor, beautifyProfileLightsOn);   //shadows are cpu consuming, so any other effect will be desabled for better performance
+            //SetCameraWithBeautify(_centerCameraAnchor, beautifyProfileLightsOn);   //shadows are cpu consuming, so any other effect will be desabled for better performance
             lmScript.useCustomLight = true;
             OnDayLightSet.Invoke();
         }

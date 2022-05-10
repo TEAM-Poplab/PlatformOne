@@ -4,14 +4,14 @@
 *
 ************************************************************************************/
 
-using BeautifyEffect;
+//using BeautifyEffect;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using BeautifyEffect;
+//using BeautifyEffect;
 using System;
 using System.Runtime.CompilerServices;
 using TMPro;
@@ -27,7 +27,7 @@ using Ludiq;
 public class GameManagerOsaka : Singleton<GameManagerOsaka>, IMixedRealityTeleportHandler
 {
     //[SerializeField] private Beautify beautifyScript;
-    [SerializeField] private BeautifyProfile profile;
+    //[SerializeField] private BeautifyProfile profile;
     [SerializeField] private LoadingButtonMeshSequenceController _lightChangeButton;
     [SerializeField] private TextMeshProUGUI lightChangeButtonText;
     [SerializeField] private LoadingButtonMeshSequenceController _exitButton;
@@ -124,7 +124,7 @@ public class GameManagerOsaka : Singleton<GameManagerOsaka>, IMixedRealityTelepo
         if (_centerCameraAnchor == null)
         {
             _centerCameraAnchor = GameObject.Find("MixedRealityPlayspace/MRTK-Quest_OVRCameraRig(Clone)/TrackingSpace/CenterEyeAnchor");
-            SetCameraWithBeautify(_centerCameraAnchor);
+            //SetCameraWithBeautify(_centerCameraAnchor);
         }
 
         //if (IsLightChangeButtonActive)
@@ -204,15 +204,15 @@ public class GameManagerOsaka : Singleton<GameManagerOsaka>, IMixedRealityTelepo
      * Attaching and setting the Beautify effect on the main camera which is created on runtime
      * @param {GameObject} cameraGO - The camera which the effect will be applied to
      */
-    private void SetCameraWithBeautify(GameObject cameraGO)
-    {
-        if (!cameraGO.GetComponent<Beautify>())
-            cameraGO.AddComponent<Beautify>();
+    //private void SetCameraWithBeautify(GameObject cameraGO)
+    //{
+    //    if (!cameraGO.GetComponent<Beautify>())
+    //        cameraGO.AddComponent<Beautify>();
 
-        Beautify bf = cameraGO.GetComponent<Beautify>();
-        bf.profile = profile;
-        bf.quality = BEAUTIFY_QUALITY.BestPerformance;
-    }
+    //    Beautify bf = cameraGO.GetComponent<Beautify>();
+    //    bf.profile = profile;
+    //    bf.quality = BEAUTIFY_QUALITY.BestPerformance;
+    //}
 
     public void OnLightChange()
     {
