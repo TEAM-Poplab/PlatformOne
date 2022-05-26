@@ -2521,6 +2521,7 @@ namespace Ludiq.Generated.Aot
 	// UnityEngine.FrictionJoint2D.op_Inequality
 	// UnityEngine.GameObject..ctor
 	// UnityEngine.GameObject..ctor
+	// UnityEngine.GameObject.activeInHierarchy
 	// UnityEngine.GameObject.activeSelf
 	// UnityEngine.GameObject.AddComponent
 	// UnityEngine.GameObject.CompareTag
@@ -2967,6 +2968,7 @@ namespace Ludiq.Generated.Aot
 	// UnityEngine.Vector2.op_UnaryNegation
 	// UnityEngine.Vector2.Set
 	// UnityEngine.Vector3..ctor
+	// UnityEngine.Vector3.Angle
 	// UnityEngine.Vector3.forward
 	// UnityEngine.Vector3.Lerp
 	// UnityEngine.Vector3.magnitude
@@ -11996,12 +11998,12 @@ namespace Ludiq.Generated.Aot
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void Microsoft_MixedReality_Toolkit_Experimental_Utilities_Follow_SmoothTo()
 		{
-			global::UnityEngine.Quaternion arg0 = default(global::UnityEngine.Quaternion);
-			global::UnityEngine.Quaternion arg1 = default(global::UnityEngine.Quaternion);
+			global::UnityEngine.Vector3 arg0 = default(global::UnityEngine.Vector3);
+			global::UnityEngine.Vector3 arg1 = default(global::UnityEngine.Vector3);
 			float arg2 = default(float);
 			float arg3 = default(float);
 			global::Microsoft.MixedReality.Toolkit.Utilities.Solvers.Solver.SmoothTo(arg0, arg1, arg2, arg3);
-			global::Ludiq.StaticFunctionInvoker<UnityEngine.Quaternion, UnityEngine.Quaternion, float, float, UnityEngine.Quaternion> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Quaternion, UnityEngine.Quaternion, float, float, UnityEngine.Quaternion>(default(global::System.Reflection.MethodInfo));
+			global::Ludiq.StaticFunctionInvoker<UnityEngine.Vector3, UnityEngine.Vector3, float, float, UnityEngine.Vector3> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Vector3, UnityEngine.Vector3, float, float, UnityEngine.Vector3>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(null, arg0, arg1, arg2, arg3);
 			optimized.Invoke(default(object[]));
 		}
@@ -12010,12 +12012,12 @@ namespace Ludiq.Generated.Aot
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void Microsoft_MixedReality_Toolkit_Experimental_Utilities_Follow_SmoothTo_0()
 		{
-			global::UnityEngine.Vector3 arg0 = default(global::UnityEngine.Vector3);
-			global::UnityEngine.Vector3 arg1 = default(global::UnityEngine.Vector3);
+			global::UnityEngine.Quaternion arg0 = default(global::UnityEngine.Quaternion);
+			global::UnityEngine.Quaternion arg1 = default(global::UnityEngine.Quaternion);
 			float arg2 = default(float);
 			float arg3 = default(float);
 			global::Microsoft.MixedReality.Toolkit.Utilities.Solvers.Solver.SmoothTo(arg0, arg1, arg2, arg3);
-			global::Ludiq.StaticFunctionInvoker<UnityEngine.Vector3, UnityEngine.Vector3, float, float, UnityEngine.Vector3> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Vector3, UnityEngine.Vector3, float, float, UnityEngine.Vector3>(default(global::System.Reflection.MethodInfo));
+			global::Ludiq.StaticFunctionInvoker<UnityEngine.Quaternion, UnityEngine.Quaternion, float, float, UnityEngine.Quaternion> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Quaternion, UnityEngine.Quaternion, float, float, UnityEngine.Quaternion>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(null, arg0, arg1, arg2, arg3);
 			optimized.Invoke(default(object[]));
 		}
@@ -32287,6 +32289,16 @@ namespace Ludiq.Generated.Aot
 			new UnityEngine.GameObject();
 		}
 		
+		// UnityEngine.GameObject.activeInHierarchy
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UnityEngine_GameObject_activeInHierarchy()
+		{
+			global::UnityEngine.GameObject target = default(global::UnityEngine.GameObject);
+			bool accessor = target.activeInHierarchy;
+			global::Ludiq.InstancePropertyAccessor<UnityEngine.GameObject, bool> optimized = new global::Ludiq.InstancePropertyAccessor<UnityEngine.GameObject, bool>(default(global::System.Reflection.PropertyInfo));
+			optimized.GetValue(default(global::UnityEngine.GameObject));
+		}
+		
 		// UnityEngine.GameObject.activeSelf
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void UnityEngine_GameObject_activeSelf()
@@ -37486,6 +37498,18 @@ namespace Ludiq.Generated.Aot
 			float arg1 = default(float);
 			float arg2 = default(float);
 			new UnityEngine.Vector3(arg0, arg1, arg2);
+		}
+		
+		// UnityEngine.Vector3.Angle
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UnityEngine_Vector3_Angle()
+		{
+			global::UnityEngine.Vector3 arg0 = default(global::UnityEngine.Vector3);
+			global::UnityEngine.Vector3 arg1 = default(global::UnityEngine.Vector3);
+			global::UnityEngine.Vector3.Angle(arg0, arg1);
+			global::Ludiq.StaticFunctionInvoker<UnityEngine.Vector3, UnityEngine.Vector3, float> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Vector3, UnityEngine.Vector3, float>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0, arg1);
+			optimized.Invoke(default(object[]));
 		}
 		
 		// UnityEngine.Vector3.forward
